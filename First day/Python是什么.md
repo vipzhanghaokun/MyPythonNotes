@@ -86,7 +86,7 @@ def sum(a, b):
 
 ​	**时间轴**：
 
-![Python发展历史](./Python发展史.png)
+![Python发展历史](./images/Python发展史.png)
 
 ## Python功能
 
