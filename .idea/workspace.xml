@@ -32,6 +32,7 @@
       <list>
         <option value="$PROJECT_DIR$/First day/Python是什么.md" />
         <option value="$PROJECT_DIR$/First day/for循环.md" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -42,8 +43,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="501" />
-    <option name="y" value="35" />
+    <option name="x" value="646" />
+    <option name="y" value="13" />
     <option name="width" value="1145" />
     <option name="height" value="1023" />
   </component>
@@ -353,11 +354,18 @@
       <option name="project" value="LOCAL" />
       <updated>1497716011199</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="for">
+      <created>1497717165002</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1497717165002</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="501" y="35" width="1145" height="1023" extended-state="0" />
+    <frame x="646" y="13" width="1145" height="1023" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1797235" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -425,6 +433,7 @@
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="0">
             <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -440,31 +449,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
+    <entry file="file://$PROJECT_DIR$/First day/for循环.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <first_editor relative-caret-position="1415">
+            <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
+            <folding>
+              <marker date="1497716995834" expanded="true" signature="764:1005" ph="..." />
+              <marker date="1497716995834" expanded="true" signature="961:1005" ph="..." />
+              <marker date="1497716995834" expanded="true" signature="1146:1467" ph="..." />
+              <marker date="1497716995834" expanded="true" signature="1344:1388" ph="..." />
+              <marker date="1497716995834" expanded="true" signature="1406:1467" ph="'''...'''" />
+              <marker date="1497716995834" expanded="true" signature="1487:1591" ph="..." />
+              <marker date="1497716995834" expanded="true" signature="1927:2027" ph="..." />
+              <marker date="1497716995834" expanded="true" signature="1968:2002" ph="..." />
+            </folding>
           </first_editor>
           <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/First day/for循环.md">
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="660">
-            <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
-            <folding>
-              <marker date="1497716005935" expanded="true" signature="764:1005" ph="..." />
-              <marker date="1497716005935" expanded="true" signature="961:1005" ph="..." />
-              <marker date="1497716005935" expanded="true" signature="1146:1467" ph="..." />
-              <marker date="1497716005935" expanded="true" signature="1344:1388" ph="..." />
-              <marker date="1497716005935" expanded="true" signature="1406:1467" ph="'''...'''" />
-              <marker date="1497716005935" expanded="true" signature="1487:1591" ph="..." />
-              <marker date="1497716005935" expanded="true" signature="1927:2027" ph="..." />
-              <marker date="1497716005935" expanded="true" signature="1968:2002" ph="..." />
-            </folding>
+          <first_editor relative-caret-position="76">
+            <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+            <folding />
           </first_editor>
           <second_editor />
         </state>
