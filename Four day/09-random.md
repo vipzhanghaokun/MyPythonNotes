@@ -86,6 +86,27 @@
 
 ## 二、应用场景
 
+​	随机验证码
+
+```python
+import random
+
+
+def random_code():
+    code = ''
+    for i in range(6):
+        tmp = random.randint(0,9)
+        if i == tmp:
+            tmp_n = random.randint(65,90)
+            tmp = chr(tmp_n)
+        code += str(tmp)
+    return code
+
+x = random_code()
+
+print(x)
+```
+
 
 
 
