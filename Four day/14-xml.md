@@ -149,6 +149,115 @@ print(root[0][1].text)		# 2008
 
   ​
 
+* 修改XML
+
+  向每个国家/地区的排名添加一个，并向rank元素添加`updated`属性：
+
+  ```python
+  >>> for rank in root.iter('rank'):
+  ...     new_rank = int(rank.text) + 1
+  ...     rank.text = str(new_rank)
+  ...     rank.set('updated', 'yes')
+  ...
+  >>> tree.write('output.xml')
+  ```
+
+  现在的XML文件
+
+  ```xml
+  <?xml version="1.0"?>
+  <data>
+      <country name="Liechtenstein">
+          <rank updated="yes">2</rank>
+          <year>2008</year>
+          <gdppc>141100</gdppc>
+          <neighbor name="Austria" direction="E"/>
+          <neighbor name="Switzerland" direction="W"/>
+      </country>
+      <country name="Singapore">
+          <rank updated="yes">5</rank>
+          <year>2011</year>
+          <gdppc>59900</gdppc>
+          <neighbor name="Malaysia" direction="N"/>
+      </country>
+      <country name="Panama">
+          <rank updated="yes">69</rank>
+          <year>2011</year>
+          <gdppc>13600</gdppc>
+          <neighbor name="Costa Rica" direction="W"/>
+          <neighbor name="Colombia" direction="E"/>
+      </country>
+  </data>
+  ```
+
+  ​
+
+* 删除XML
+
+  使用`Element.remove()`删除元素。假设我们要移除排名高于50的所有国家/地区：
+
+  ```python
+  >>> for country in root.findall('country'):
+  ...     rank = int(country.find('rank').text)
+  ...     if rank > 50:
+  ...         root.remove(country)
+  ...
+  >>> tree.write('output.xml')
+  ```
+
+  现在的XML文件
+
+  ```xml
+  <?xml version="1.0"?>
+  <data>
+      <country name="Liechtenstein">
+          <rank updated="yes">2</rank>
+          <year>2008</year>
+          <gdppc>141100</gdppc>
+          <neighbor name="Austria" direction="E"/>
+          <neighbor name="Switzerland" direction="W"/>
+      </country>
+      <country name="Singapore">
+          <rank updated="yes">5</rank>
+          <year>2011</year>
+          <gdppc>59900</gdppc>
+          <neighbor name="Malaysia" direction="N"/>
+      </country>
+  </data>
+  ```
+
+  ​
+
+* 创建XML文件
+
+  ```python
+  >>> a = ET.Element('a')
+  >>> b = ET.SubElement(a, 'b')
+  >>> c = ET.SubElement(a, 'c')
+  >>> d = ET.SubElement(c, 'd')
+  >>> ET.dump(a)
+  <a><b /><c><d /></c></a>
+  ```
+
+  示例
+
+  ```python
+  new_xml = ET.Element("configation")
+  name = ET.SubElement(new_xml,"name",attrib={"enrolled":"yes"})
+  age = ET.SubElement(name,"age",attrib={"checked":"no"})
+  sex = ET.SubElement(name,"sex")
+  sex.text = '33'
+  name2 = ET.SubElement(new_xml,"name",attrib={"enrolled":"no"})
+  age2 = ET.SubElement(name2,"age")
+  age2.text = '19'
+
+  et = ET.ElementTree(new_xml) #生成文档对象
+  et.write("test.xml", encoding="utf-8",xml_declaration=True)
+
+  ET.dump(new_xml) #打印生成的格式
+
+  ```
+
   ​
 
 * ​
