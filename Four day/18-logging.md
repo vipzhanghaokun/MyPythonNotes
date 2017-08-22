@@ -110,36 +110,6 @@ logging.warning("the msg from warning!")
 
 ​	指定日期格式
 
-```python
-logging.basicConfig(filename='example.log',datefmt='%m/%d/%Y %I:%M:%S %p',level=logging.DEBUG,format='%(asctime)s : %(message)s',filemode='w')
-logging.debug("the msg from debug!")
-logging.info("the msg from info!")
-logging.warning("the msg from warning!")
-```
-
-​	日志内容
-
-```python
-08/22/2017 10:50:56 AM : the msg from debug!
-08/22/2017 10:50:56 AM : the msg from info!
-08/22/2017 10:50:56 AM : the msg from warning!
-
-```
-
-
-
-
-
-# 高级日志
-
-logging库采取了模块化的设计，提供了许多组件：记录器、处理器、过滤器和格式化器。
-
-- Logger 暴露了应用程序代码能直接使用的接口。
-- Handler将（记录器产生的）日志记录发送至合适的目的地。
-- Filter提供了更好的粒度控制，它可以决定输出哪些日志记录。
-- Formatter 指明了最终输出中日志记录的布局。
-
-
 
 日志格式化支持的字符串
 
@@ -169,3 +139,94 @@ logging库采取了模块化的设计，提供了许多组件：记录器、处�
 
 
 
+
+
+```python
+logging.basicConfig(filename='example.log',datefmt='%m/%d/%Y %I:%M:%S %p',level=logging.DEBUG,format='%(asctime)s : %(message)s',filemode='w')
+logging.debug("the msg from debug!")
+logging.info("the msg from info!")
+logging.warning("the msg from warning!")
+```
+
+​	日志内容
+
+```python
+08/22/2017 10:50:56 AM : the msg from debug!
+08/22/2017 10:50:56 AM : the msg from info!
+08/22/2017 10:50:56 AM : the msg from warning!
+```
+
+
+
+
+
+# 高级日志
+
+logging库采取了模块化的设计，提供了许多组件：记录器、处理器、过滤器和格式化器。
+
+- Logger 暴露了应用程序代码能直接使用的接口。
+- Handler将（记录器产生的）日志记录发送至合适的目的地。
+- Filter提供了更好的粒度控制，它可以决定输出哪些日志记录。
+- Formatter 指明了最终输出中日志记录的布局。
+
+
+
+
+
+```python
+import logging
+
+# create logger with 'spam_application'
+logger = logging.getLogger('spam_application')
+logger.setLevel(logging.DEBUG)
+
+# create file handler which logs even debug messages
+fh = logging.FileHandler('spam.log')
+fh.setLevel(logging.DEBUG)
+
+# create console handler with a higher log level
+ch = logging.StreamHandler()
+ch.setLevel(logging.ERROR)
+
+# create formatter and add it to the handlers
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+fh.setFormatter(formatter)
+ch.setFormatter(formatter)
+
+
+# add the handlers to the logger
+logger.addHandler(fh)
+logger.addHandler(ch)
+
+logger.info('creating an instance of auxiliary_module.Auxiliary')
+
+logger.info('created an instance of auxiliary_module.Auxiliary')
+logger.info('calling auxiliary_module.Auxiliary.do_something')
+
+logger.info('finished auxiliary_module.Auxiliary.do_something')
+logger.info('calling auxiliary_module.some_function()')
+
+logger.info('done with auxiliary_module.some_function()')
+```
+
+
+
+# 日志轮询
+
+## RotatingFileHandler
+
+位[`logging.handlers`模块中的`RotatingFileHandler`类支持磁盘日志文件的旋转。
+
+- *class *`logging.handlers.``RotatingFileHandler`(*filename*, *mode='a'*, *maxBytes=0*, *backupCount=0*, *encoding=None*,*delay=False*)
+
+  返回`RotatingFileHandler`类的新实例。指明的文件会被打开，并用作日志流。如果未指定*mode*，则使用`'a'`。如果*encoding*不为*None*，会用指定的编码来打开文件。如果*delay*为真，则文件打开将延迟到第一次调用`emit()`。默认情况下，文件会一直增长。可以使用*maxBytes* 和 *backupCount* 来让文件在预定义的尺寸发生*翻转*。当文件大小大概要超出时，文件被关闭，新文件被打开用来输出。当当前日志文件的长度接近*maxBytes*时，发生翻转；如果*maxBytes*或*backupCount*为零，则不会发生滚动。如果*backupCount*不为0，系统将保存老的日志文件，在文件名后加上‘.1’, ‘.2’这样的扩展名。例如，如果*backupCount*为5，基本文件名为`app.log`，则会获得`app.log`，`app.log.1`，`app.log.2`，最多为`app.log.5`。正在写入的文件始终为`app.log`。当此文件填充时，它将关闭并重命名为`app.log.1`，如果文件`app.log.1`，`app.log.2`存在，则将它们重命名为`app.log.2`，`app.log.3`等。分别。`doRollover`()如上所述做文件的翻转。`emit`(*record*)输出记录到文件，负责文件的翻转。
+
+
+
+## TimedRotatingFileHandler
+
+`TimedRotatingFileHandler`类位于`logging.handlers`模块中，支持以特定的时间间隔旋转磁盘日志文件。
+
+- *class *`logging.handlers.``TimedRotatingFileHandler`(*filename*, *when='h'*, *interval=1*, *backupCount=0*,*encoding=None*, *delay=False*, *utc=False*, *atTime=None*)
+
+  返回`TimedRotatingFileHandler`类的新实例。指明的文件会被打开，并用作日志流。在循环时它也会设置文件后缀。循环发生基于*when* 和 *interval*的乘积。使用*when*来指明*interval*的类型。可能的值列在下面。注意大小写不敏感。值间隔类型`'S'`秒`'M'`分钟`'H'`小时`'D'`天`'W0'-'W6'`平日（0 =星期一）`'midnight'`午夜翻滚注意在使用基于工作日的循环时，‘W0’表示星期一，‘W1’表示星期二，依此类推，‘W6’表示星期日。这种情况下不使用*interval*。系统会保存老的日志文件，在文件名后添加扩展名。根据滚动间隔，扩展使用strftime格式`%Y-%m-%d_%H-%M-%S`或其前导部分，基于日期和时间。第一次计算下一次翻转时间的时候（创建handler时），要么使用已存文件的上一次修改时间，要么使用当前时间。如果*utc*参数为真，将使用UTC中的时间；否则使用本地时间。如果*backupCount*不为0，最多保留*backupCount*个文件，如果产生更多的文件，最老的文件会被删除。删除逻辑使用间隔来决定删除哪些文件，所以改变间隔可能会导致老的文件被保留。如果*delay*为真，则文件打开将延迟到第一次调用`emit()`。如果*atTime*不是`None`，则必须是`datetime.time`实例，其指定发生翻转的时间，被设置为在“午夜”或“在特定的工作日”。
