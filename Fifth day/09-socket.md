@@ -32,15 +32,15 @@ http，https，smtp，ftp，ssh，snmp，ICMP，DHCP
 
 * **TCP协议：**
 
-​	TCP是面向连接的通信协议，通过三次握手建立连接，通讯完成时要拆除连接，由于TCP是面向连接的所以只能用于端到端的通讯。
+  ​TCP是面向连接的通信协议，通过三次握手建立连接，通讯完成时要拆除连接，由于TCP是面向连接的所以只能用于端到端的通讯。
 
-​	TCP提供的是一种可靠的数据流服务，采用“带重传的肯定确认”技术来实现传输的可靠性。
+  ​TCP提供的是一种可靠的数据流服务，采用“带重传的肯定确认”技术来实现传输的可靠性。
 
 * **UDP协议：**
 
-​	UDP是面向无连接的通讯协议，UDP数据包括目的端口号和源端口号信息，由于通讯不需要连接，所以可以实现广播发送。
+  ​UDP是面向无连接的通讯协议，UDP数据包括目的端口号和源端口号信息，由于通讯不需要连接，所以可以实现广播发送。
 
-​	UDP通讯时不需要接收方确认，属于不可靠的传输，可能会出现丢包现象，实际应用中要求程序员编程验证。
+  ​UDP通讯时不需要接收方确认，属于不可靠的传输，可能会出现丢包现象，实际应用中要求程序员编程验证。
 
 
 
@@ -57,11 +57,13 @@ http，https，smtp，ftp，ssh，snmp，ICMP，DHCP
 
 2、选择协议TCP or UDP
 
-3、监听地址（IP,Port）
+3、绑定地址（IP,Port）
 
-4、等待接入
+4、监听地址
 
-5、接收数据 / 发送数据
+5、等待接入
+
+6、接收数据 / 发送数据
 
 '''
 
@@ -82,9 +84,9 @@ http，https，smtp，ftp，ssh，snmp，ICMP，DHCP
 
 
 
-* socket Families（地址簇）
+* socket Families（地址家族）
 
-  即协议类型。
+  AF：（address family）
 
   **socket.AF_UNIX** : unix本机进程间通信
 
@@ -92,5 +94,50 @@ http，https，smtp，ftp，ssh，snmp，ICMP，DHCP
 
   **socket.AF_INET**6 : IPV6
 
-* ​
+* socket Types（socket类型）
 
+  socket.SOCK_STREAM：TCP使用的套接字类型
+
+  oscket.SOCK_DGRAM：UDP使用的套接字类型，DGRAM源于（datagrame，数据报）
+
+
+
+
+## 三、创建TCP服务器
+
+​	TCP服务端简单示例：
+
+```python
+import socket
+
+s1 = socket.socket()
+s1.bind(('127.0.0.1',1200))
+
+s1.listen()
+print('等待连接。。。')
+conn,addr = s1.accept()    # conn是客户端连接过来，在服务器端为其生成的连接实例。
+print('连接来自。。。',addr)
+
+data = conn.recv(1024)
+print(data)
+conn.send(data.upper())
+
+s1.close()
+```
+
+​	TCP客户端简单示例：
+
+```python
+import socket
+
+c1 = socket.socket()
+c1.connect(('127.0.0.1',1200))
+
+c1.send(b'Hello World!')
+data = c1.recv(1024)
+print(data)
+
+c1.close()
+```
+
+​	注：发送中文字符，需要`encode()`进行编码
